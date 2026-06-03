@@ -1,10 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { ChapterIndex } from "@/components/ui/ChapterIndex";
 import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { Marquee } from "@/components/effects/Marquee";
+
+// Lazy load — solo se carga cuando llega al Códice
+const InfectedMaskScene = dynamic(
+  () => import("@/components/three/InfectedMaskScene").then((m) => m.InfectedMaskScene),
+  { ssr: false },
+);
 
 interface CodexEntry {
   title: string;
@@ -150,8 +157,8 @@ export function Codice() {
       id="codice"
       className="relative z-[1] min-h-screen w-full overflow-hidden bg-void py-32"
     >
-      <div className="px-6 md:px-12 flex items-end justify-between mb-12 md:mb-16">
-        <div className="flex flex-col gap-3">
+      <div className="px-6 md:px-12 grid grid-cols-12 gap-4 mb-12 md:mb-16 items-center">
+        <div className="col-span-12 md:col-span-7 flex flex-col gap-3">
           <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
           <h2 className="font-display text-[14vw] md:text-[9vw] leading-[0.85] tracking-tight">
             CÓDICE
@@ -161,10 +168,25 @@ export function Codice() {
             className="max-w-md mt-2"
             textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
           />
+          <div className="flex items-center gap-4 mt-4">
+            <ChapterIndex n="004" className="text-[8vw] md:text-[4vw]" />
+            <BracketLabel highlight>CÓDICE</BracketLabel>
+          </div>
         </div>
-        <div className="flex items-center gap-4">
-          <ChapterIndex n="004" className="text-[8vw] md:text-[4vw]" />
-          <BracketLabel highlight>CÓDICE</BracketLabel>
+
+        {/* Modelo 3D — solo desktop para no afectar mobile */}
+        <div className="hidden md:block col-span-5 h-[500px] relative">
+          <div className="absolute inset-0">
+            <InfectedMaskScene />
+          </div>
+          {/* Halo crimson detrás del modelo */}
+          <div
+            className="absolute inset-0 -z-10 pointer-events-none opacity-40"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(192,32,43,0.15) 0%, transparent 60%)",
+            }}
+          />
         </div>
       </div>
 

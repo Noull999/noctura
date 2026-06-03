@@ -118,7 +118,7 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
             <BracketLabel className="text-bone normal-case tracking-[0.2em]">
               PUERTO MONTT / CL
             </BracketLabel>
-            <RomanClock className="text-[9px] mt-1" />
+            <RomanClock className="mt-1" />
           </div>
 
           {/* Derecha — audio + contacto */}

@@ -3,6 +3,7 @@
 import { HeroScene } from "@/components/three/HeroScene";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { CoordsTag } from "@/components/ui/CoordsTag";
+import { RomanClock } from "@/components/ui/RomanClock";
 import { GlitchText } from "@/components/effects/GlitchText";
 import { ScrollIndicator } from "@/components/effects/ScrollIndicator";
 
@@ -18,7 +19,10 @@ export function Hero3D({ onBreak }: { onBreak?: () => void } = {}) {
           <div className="font-calig text-4xl md:text-5xl leading-none text-ink">
             ✠
           </div>
-          <BracketLabel className="text-bone">{`41,4693°S / 72,9424°O`}</BracketLabel>
+          <div className="flex flex-col items-end gap-1">
+            <BracketLabel className="text-bone">{`41,4693°S / 72,9424°O`}</BracketLabel>
+            <RomanClock />
+          </div>
         </div>
 
         <div className="grid grid-cols-12 gap-4 items-end">

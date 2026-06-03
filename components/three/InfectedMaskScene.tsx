@@ -1,0 +1,45 @@
+'use client'
+
+import { useRef, Suspense } from 'react'
+import { useFrame, useLoader } from '@react-three/fiber'
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { SceneCanvas } from './SceneCanvas'
+
+function InfectedMask() {
+  const ref = useRef<THREE.Group>(null)
+  const gltf = useLoader(GLTFLoader, '/models/infected_chrome_mask.glb')
+
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.y += 0.35 * delta
+      // Pequeña oscilación
+      ref.current.position.y = Math.sin(Date.now() * 0.0008) * 0.5
+    }
+  })
+
+  return (
+    <group ref={ref} scale={15} position={[0, 0, 0]}>
+      <primitive object={gltf.scene} />
+    </group>
+  )
+}
+
+export function InfectedMaskScene() {
+  return (
+    <SceneCanvas
+      camera={{ position: [0, 5, 35], fov: 70 }}
+      style={{ background: 'transparent' }}
+      dpr={1}
+    >
+      <ambientLight intensity={4} />
+      <hemisphereLight args={['#aaaaaa', '#222222', 3]} />
+      <directionalLight position={[10, 20, 10]} intensity={8} />
+      <directionalLight position={[-10, 10, -5]} intensity={5} color="#c0202b" />
+      <directionalLight position={[0, -5, 10]} intensity={3} color="#e63946" />
+      <Suspense fallback={null}>
+        <InfectedMask />
+      </Suspense>
+    </SceneCanvas>
+  )
+}
