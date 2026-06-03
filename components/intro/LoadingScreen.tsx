@@ -7,13 +7,49 @@ import { WireframeMorph } from "@/components/effects/WireframeMorph";
 import { RedButton } from "@/components/ui/RedButton";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { MidnightSpikedOrbScene } from "@/components/three/MidnightSpikedOrbScene";
-// useLoader hooks removed - they cannot be used outside of a Canvas context
+
+const RITUAL_STEPS = [
+  "ENCENDIENDO ALTAR...",
+  "INVOCANDO SOMBRAS...",
+  "ABRIENDO EL UMBRAL...",
+  "DESPERTANDO LA FORMA...",
+  "TEJIENDO EL CÓDIGO...",
+  "SELLANDO EL RITO...",
+  "PREPARANDO LA ENTRADA...",
+];
+
+// Efecto de escritura letra a letra
+function TypeWriter({ text, onDone }: { text: string; onDone?: () => void }) {
+  const [displayed, setDisplayed] = useState("");
+
+  useEffect(() => {
+    setDisplayed("");
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(id);
+        onDone?.();
+      }
+    }, 38);
+    return () => clearInterval(id);
+  }, [text, onDone]);
+
+  return (
+    <span>
+      {displayed}
+      <span className="animate-pulse text-blood">_</span>
+    </span>
+  );
+}
 
 export function LoadingScreen({
   onEnter,
 }: {
   onEnter: (withAudio: boolean) => void;
 }) {
+  const [stepIndex, setStepIndex] = useState(0);
   const [percent, setPercent] = useState(0);
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(true);
@@ -21,7 +57,6 @@ export function LoadingScreen({
 
   useEffect(() => {
     setMounted(true);
-    // reset scroll and lock body while intro is up
     window.scrollTo(0, 0);
     const w = window as unknown as {
       __lenis?: {
@@ -41,16 +76,23 @@ export function LoadingScreen({
     };
   }, []);
 
+  // Avanza el % y controla qué paso ritual mostrar
   useEffect(() => {
     let v = 0;
     const id = setInterval(() => {
-      v = Math.min(100, v + Math.random() * 8);
+      v = Math.min(100, v + Math.random() * 5 + 1);
       setPercent(Math.floor(v));
+      // Cambiar paso ritual según el progreso
+      const idx = Math.min(
+        Math.floor((v / 100) * RITUAL_STEPS.length),
+        RITUAL_STEPS.length - 1
+      );
+      setStepIndex(idx);
       if (v >= 100) {
         clearInterval(id);
-        setReady(true);
+        setTimeout(() => setReady(true), 600);
       }
-    }, 70);
+    }, 80);
     return () => clearInterval(id);
   }, []);
 
@@ -79,26 +121,42 @@ export function LoadingScreen({
             <MidnightSpikedOrbScene />
           </div>
           <WireframeMorph />
+
           <div className="relative z-10 flex flex-col items-center gap-10 text-ink">
-            <h1 className="font-display text-5xl md:text-7xl tracking-tight leading-none text-ink">
+            <motion.h1
+              className="font-display text-5xl md:text-7xl tracking-tight leading-none text-ink"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               {"{NÓCTURA}"}
-            </h1>
+            </motion.h1>
 
             {!ready ? (
-              <div className="flex flex-col items-center gap-2">
-                <div className="font-mono text-sm tracking-[0.3em] text-bone">
-                  CARGANDO
+              <div className="flex flex-col items-center gap-4 w-64">
+                {/* Texto ritual progresivo */}
+                <div className="font-mono text-xs tracking-[0.25em] text-bone h-5 text-center">
+                  <TypeWriter key={stepIndex} text={RITUAL_STEPS[stepIndex]} />
                 </div>
-                <div className="font-mono text-xs tracking-[0.3em] text-ink">
-                  {percent} %
-                </div>
-                <div className="mt-2 h-px w-32 bg-ash overflow-hidden">
+
+                {/* Barra de progreso */}
+                <div className="w-full h-px bg-ash overflow-hidden">
                   <motion.div
                     className="h-full bg-blood"
                     initial={{ width: 0 }}
                     animate={{ width: `${percent}%` }}
-                    transition={{ ease: "linear", duration: 0.1 }}
+                    transition={{ ease: "linear", duration: 0.15 }}
                   />
+                </div>
+
+                {/* Porcentaje romano-estético */}
+                <div className="flex justify-between w-full">
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-ash">
+                    RITUAL
+                  </span>
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-blood">
+                    {percent.toString().padStart(3, "0")} ‰
+                  </span>
                 </div>
               </div>
             ) : (
@@ -108,6 +166,14 @@ export function LoadingScreen({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
+                <motion.div
+                  className="font-mono text-xs tracking-[0.3em] text-bone text-center mb-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  EL UMBRAL ESTÁ ABIERTO
+                </motion.div>
                 <div className="flex gap-3">
                   <RedButton variant="outline" onClick={() => handleEnter(true)}>
                     ENTRAR CON AUDIO
@@ -116,7 +182,7 @@ export function LoadingScreen({
                     ENTRAR SIN AUDIO
                   </RedButton>
                 </div>
-                <BracketLabel className="mt-4 text-bone normal-case tracking-[0.2em]">
+                <BracketLabel className="mt-4 text-bone normal-case tracking-[0.2em] text-center max-w-xs">
                   ESTA EXPERIENCIA INCLUYE SONIDO · PARA LA ATMÓSFERA DESEADA, ACTIVE EL AUDIO
                 </BracketLabel>
               </motion.div>
