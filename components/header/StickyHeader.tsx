@@ -46,7 +46,7 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
       setEggActive(true);
       if (eggTimer.current) clearTimeout(eggTimer.current);
       eggTimer.current = setTimeout(() => setEggActive(false), 3000);
-    }, 1500); // reducido a 1.5s para que sea más fácil de descubrir
+    }, 800);
   };
 
   const cancelHold = () => {
