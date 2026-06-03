@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { CoordsTag } from "@/components/ui/CoordsTag";
 import { RedButton } from "@/components/ui/RedButton";
+import { RomanClock } from "@/components/ui/RomanClock";
 import { toggle, onChange, isPlaying } from "@/lib/audio";
 
 const EASTER_EGG_MESSAGES = [
@@ -111,12 +112,13 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
             )}
           </AnimatePresence>
 
-          {/* Centro — coords, solo desktop */}
+          {/* Centro — coords + reloj romano, solo desktop */}
           <div className="hidden md:flex flex-col gap-1 items-center">
             <CoordsTag />
             <BracketLabel className="text-bone normal-case tracking-[0.2em]">
               PUERTO MONTT / CL
             </BracketLabel>
+            <RomanClock className="text-[9px] mt-1" />
           </div>
 
           {/* Derecha — audio + contacto */}

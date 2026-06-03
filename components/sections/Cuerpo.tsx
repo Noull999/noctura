@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { ChapterIndex } from "@/components/ui/ChapterIndex";
 import { BracketLabel } from "@/components/ui/BracketLabel";
+import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { Marquee } from "@/components/effects/Marquee";
 
 const ParticleField = dynamic(
@@ -21,9 +22,11 @@ export function Cuerpo() {
         <div className="relative z-10 grid grid-cols-12 gap-4 px-6 md:px-12 h-full items-center">
           <div className="col-span-12 md:col-span-4 flex flex-col gap-4">
             <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
-            <p className="max-w-sm font-mono text-xs tracking-[0.18em] text-bone leading-relaxed">
-              La materia se reúne. Forma silueta, halo, columna. Y al pasar el ojo, se disgrega — pura partícula, puro polvo.
-            </p>
+            <IlluminatedCapital
+              text="La materia se reúne. Forma silueta, halo, columna. Y al pasar el ojo, se disgrega — pura partícula, puro polvo."
+              className="max-w-sm"
+              textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
+            />
           </div>
           <div className="col-span-12 md:col-span-8 flex justify-end items-end h-full pb-16">
             <div className="flex flex-col items-end gap-2">

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { ChapterIndex } from "@/components/ui/ChapterIndex";
+import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { Marquee } from "@/components/effects/Marquee";
 
 interface CodexEntry {
@@ -155,9 +156,11 @@ export function Codice() {
           <h2 className="font-display text-[14vw] md:text-[9vw] leading-[0.85] tracking-tight">
             CÓDICE
           </h2>
-          <p className="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed max-w-md mt-2">
-            Reliquias del trabajo. Cada entrada es un rito completado, un sistema vivo. Toca para invocarla.
-          </p>
+          <IlluminatedCapital
+            text="Reliquias del trabajo. Cada entrada es un rito completado, un sistema vivo. Toca para invocarla."
+            className="max-w-md mt-2"
+            textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
+          />
         </div>
         <div className="flex items-center gap-4">
           <ChapterIndex n="004" className="text-[8vw] md:text-[4vw]" />

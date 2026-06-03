@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { CoordsTag } from "@/components/ui/CoordsTag";
+import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { IronEyeScene } from "@/components/three/IronEyeScene";
 
 // Versículos del manifiesto, divididos para enumerarlos
@@ -21,9 +22,6 @@ const VERSES = [
     text: "El detalle es nuestra teología y el silencio entre transiciones, oración.",
   },
 ];
-
-// La primera letra de la primera frase, separada para tratarse como capital iluminada
-const FIRST_LETTER = "C";
 
 export function Manifiesto() {
   const ref = useRef<HTMLDivElement>(null);
@@ -87,24 +85,10 @@ export function Manifiesto() {
 
               {/* Texto del versículo (con capital iluminada solo en el primero) */}
               {i === 0 ? (
-                <p className="font-display text-2xl md:text-4xl leading-tight text-ink">
-                  {/* Capital iluminada */}
-                  <span className="relative inline-block float-left mr-3 md:mr-4">
-                    <span
-                      className="font-calig leading-none text-blood"
-                      style={{
-                        fontSize: "5.5rem",
-                        textShadow: "0 0 24px rgba(192,32,43,0.4), 0 0 8px rgba(192,32,43,0.3)",
-                        lineHeight: "0.85",
-                      }}
-                    >
-                      {FIRST_LETTER}
-                    </span>
-                    {/* Decoración: pequeña cruz junto a la capital */}
-                    <span className="absolute -top-1 -right-2 font-calig text-xs text-ash opacity-60">✠</span>
-                  </span>
-                  {verse.text.slice(1)}
-                </p>
+                <IlluminatedCapital
+                  text={verse.text}
+                  textClassName="font-display text-2xl md:text-4xl leading-tight text-ink"
+                />
               ) : (
                 <p className="font-display text-2xl md:text-4xl leading-tight text-ink">
                   {verse.text}

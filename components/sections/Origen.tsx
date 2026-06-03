@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChapterIndex } from "@/components/ui/ChapterIndex";
 import { BracketLabel } from "@/components/ui/BracketLabel";
+import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { Marquee } from "@/components/effects/Marquee";
 import { ChromeDemonDollScene } from "@/components/three/ChromeDemonDollScene";
 
@@ -26,10 +27,11 @@ export function Origen() {
           <h2 className="font-display text-[18vw] md:text-[10vw] leading-[0.85] tracking-tight">
             ORIGEN
           </h2>
-          <p className="max-w-md font-mono text-xs tracking-[0.18em] text-bone leading-relaxed">
-            El primer signo. Una marca dibujada en la pared antes del lenguaje.
-            Forma simétrica, ritual, callada — el principio de todo sistema.
-          </p>
+          <IlluminatedCapital
+            text="El primer signo. Una marca dibujada en la pared antes del lenguaje. Forma simétrica, ritual, callada — el principio de todo sistema."
+            className="max-w-md"
+            textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
+          />
           <div className="flex items-center gap-6 mt-2">
             <ChapterIndex n="001" className="text-[8vw] md:text-[5vw]" />
             <BracketLabel highlight>ORIGEN</BracketLabel>

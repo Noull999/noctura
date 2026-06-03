@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChapterIndex } from "@/components/ui/ChapterIndex";
 import { BracketLabel } from "@/components/ui/BracketLabel";
+import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { Marquee } from "@/components/effects/Marquee";
 
 const TILES = [
@@ -106,11 +107,16 @@ export function Vestigios() {
   return (
     <section id="vestigios" className="relative min-h-screen w-full overflow-hidden bg-void py-32">
       <div className="px-6 md:px-12 flex items-end justify-between mb-12">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 max-w-xl">
           <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
           <h2 className="font-display text-[14vw] md:text-[9vw] leading-[0.85] tracking-tight">
             VESTIGIOS
           </h2>
+          <IlluminatedCapital
+            text="Restos que el rito olvidó. Fragmentos sin nombre que aún sangran luz, ecos visuales que persisten en la memoria del código."
+            className="max-w-md mt-4"
+            textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
+          />
         </div>
         <div className="flex items-center gap-4">
           <ChapterIndex n="003" className="text-[8vw] md:text-[4vw]" />
