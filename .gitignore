@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# stray model files at repo root (duplicates of public/models/)
+/MASK.obj
+/*.glb

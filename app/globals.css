@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void: #000000;
+  --color-surface: #0d0d0d;
+  --color-tomb: #1a1a1a;
+  --color-ash: #3a3a3a;
+  --color-bone: #7a7a7a;
+  --color-ink: #ededed;
+  --color-blood: #c0202b;
+  --color-pulse: #e63946;
+
+  --font-mono: var(--font-jetbrains);
+  --font-display: var(--font-anton);
+  --font-calig: var(--font-pirata);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html,
+body {
+  background: #000;
+  color: #ededed;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  overscroll-behavior: none;
+}
+
+html {
+  cursor: default;
+}
+
+::selection {
+  background: #c0202b;
+  color: #000;
+}
+
+/* Lenis recommended styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* CRT scanlines utility */
+.crt-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.05) 2px,
+    rgba(255, 255, 255, 0.05) 3px
+  );
+}
+
+/* Subtle barrel-curved vignette */
+.crt-vignette {
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(0, 0, 0, 0.45) 75%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+}
+
+/* Glitch shift used by GlitchText */
+@keyframes glitch-a {
+  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  20% { clip-path: inset(15% 0 60% 0); transform: translate(-2px, 1px); }
+  40% { clip-path: inset(78% 0 8% 0); transform: translate(2px, -1px); }
+  60% { clip-path: inset(40% 0 40% 0); transform: translate(-1px, 2px); }
+  80% { clip-path: inset(20% 0 65% 0); transform: translate(1px, -2px); }
+}
+@keyframes glitch-b {
+  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  25% { clip-path: inset(60% 0 15% 0); transform: translate(2px, -1px); }
+  50% { clip-path: inset(8% 0 75% 0); transform: translate(-2px, 1px); }
+  75% { clip-path: inset(45% 0 30% 0); transform: translate(1px, 2px); }
+}
+
+/* Marquee track */
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee-x 40s linear infinite;
+  will-change: transform;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Bezel curve radius — desktop only */
+.bezel-curve {
+  border-radius: 0;
+}
+@media (min-width: 1024px) {
+  .bezel-curve {
+    border-radius: 3vw / 2vw;
+  }
 }
