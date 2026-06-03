@@ -117,3 +117,15 @@ html.lenis body {
     border-radius: 3vw / 2vw;
   }
 }
+
+/* Performance optimizations */
+.marquee-track {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Smooth cursor movement */
+@supports (contain: paint) {
+  * {
+    contain: layout style paint;
+  }
+}

@@ -4,6 +4,7 @@ import { HeroScene } from "@/components/three/HeroScene";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { CoordsTag } from "@/components/ui/CoordsTag";
 import { GlitchText } from "@/components/effects/GlitchText";
+import { ScrollIndicator } from "@/components/effects/ScrollIndicator";
 
 export function Hero3D({ onBreak }: { onBreak?: () => void } = {}) {
   return (
@@ -38,6 +39,8 @@ export function Hero3D({ onBreak }: { onBreak?: () => void } = {}) {
             <CoordsTag />
           </div>
         </div>
+
+        <ScrollIndicator />
       </div>
     </section>
   );

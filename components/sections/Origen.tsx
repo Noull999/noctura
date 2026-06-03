@@ -40,14 +40,14 @@ export function Origen() {
       <Marquee
         items={[
           { label: "FIGMA" },
-          { label: "REACCIONAR" },
+          { label: "REACT.JS" },
           { label: "THREE.JS" },
           { label: "GSAP" },
           { label: "RITO" },
           { index: "001", label: "ORIGEN", highlight: true },
           { label: "SHADER" },
           { label: "CANVAS" },
-          { label: "MECANOGRAFIADO" },
+          { label: "TYPESCRIPT" },
         ]}
       />
     </section>

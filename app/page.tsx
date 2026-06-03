@@ -1,17 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import { CRTOverlay } from "@/components/crt/Bezel";
 import { LoadingScreen } from "@/components/intro/LoadingScreen";
 import { StickyHeader } from "@/components/header/StickyHeader";
 import { AsciiRainController } from "@/components/effects/AsciiRainController";
 import { AudioLoop } from "@/components/audio/AudioLoop";
+import { DripCursor } from "@/components/effects/DripCursor";
 import { Hero3D } from "@/components/sections/Hero3D";
-import { Manifiesto } from "@/components/sections/Manifiesto";
-import { Origen } from "@/components/sections/Origen";
-import { Cuerpo } from "@/components/sections/Cuerpo";
-import { Vestigios } from "@/components/sections/Vestigios";
-import { FooterSection } from "@/components/sections/Footer";
+
+const Manifiesto = dynamic(() => import("@/components/sections/Manifiesto").then(m => ({ default: m.Manifiesto })), { ssr: false });
+const Origen = dynamic(() => import("@/components/sections/Origen").then(m => ({ default: m.Origen })), { ssr: false });
+const Cuerpo = dynamic(() => import("@/components/sections/Cuerpo").then(m => ({ default: m.Cuerpo })), { ssr: false });
+const Vestigios = dynamic(() => import("@/components/sections/Vestigios").then(m => ({ default: m.Vestigios })), { ssr: false });
+const FooterSection = dynamic(() => import("@/components/sections/Footer").then(m => ({ default: m.FooterSection })), { ssr: false });
 
 export default function Home() {
   const [entered, setEntered] = useState(false);
@@ -27,6 +30,7 @@ export default function Home() {
 
   return (
     <main className="relative w-full bg-void text-ink">
+      <DripCursor />
       <LoadingScreen onEnter={(withAudio) => {
         setAudioEnabled(withAudio);
         setEntered(true);

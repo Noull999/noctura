@@ -9,32 +9,32 @@ const TILES = [
   {
     caption: "ANATOMÍA DEL SILENCIO",
     h: "tall",
-    img: "https://picsum.photos/400/600?random=1"
+    gradient: "linear-gradient(135deg, #1a1a1a 0%, #3a0a0a 50%, #0d0d0d 100%)"
   },
   {
     caption: "CATEDRAL DERRITIDA",
     h: "wide",
-    img: "https://picsum.photos/600/300?random=2"
+    gradient: "linear-gradient(45deg, #0a1a1a 0%, #2a1a2a 50%, #1a0a0a 100%)"
   },
   {
     caption: "HALO DE ESPINAS",
     h: "tall",
-    img: "https://picsum.photos/400/600?random=3"
+    gradient: "linear-gradient(180deg, #2a1a1a 0%, #1a0a3a 50%, #0a0a1a 100%)"
   },
   {
     caption: "MANUSCRITO 04",
     h: "wide",
-    img: "https://picsum.photos/600/300?random=4"
+    gradient: "linear-gradient(225deg, #1a1a1a 0%, #3a1a0a 50%, #0d0d0d 100%)"
   },
   {
     caption: "ESCAPULARIO ROTO",
     h: "tall",
-    img: "https://picsum.photos/400/600?random=5"
+    gradient: "linear-gradient(90deg, #0d0d0d 0%, #2a0a0a 50%, #1a1a2a 100%)"
   },
   {
     caption: "RITO DE PASO",
     h: "wide",
-    img: "https://picsum.photos/600/300?random=6"
+    gradient: "linear-gradient(315deg, #1a0a1a 0%, #2a1a0a 50%, #0a1a1a 100%)"
   },
 ];
 
@@ -42,17 +42,17 @@ function Tile({
   caption,
   variant,
   index,
-  img,
+  gradient,
 }: {
   caption: string;
   variant: "tall" | "wide";
   index: number;
-  img?: string;
+  gradient?: string;
 }) {
   return (
     <motion.div
       className={
-        "group relative overflow-hidden bg-tomb border border-ash/30 " +
+        "group relative overflow-hidden border border-ash/30 " +
         (variant === "tall" ? "row-span-2" : "")
       }
       whileHover={{
@@ -61,15 +61,12 @@ function Tile({
         scale: 1.02,
         transition: { duration: 0.4 },
       }}
-      style={{ transformStyle: "preserve-3d", perspective: 1200 }}
+      style={{ transformStyle: "preserve-3d" }}
     >
-      {img && (
-        <img
-          src={img}
-          alt={caption}
-          className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-500"
-        />
-      )}
+      <div
+        className="absolute inset-0 w-full h-full"
+        style={{ background: gradient || "linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%)" }}
+      />
       <div
         className="absolute inset-0 mix-blend-multiply opacity-60"
         style={{
@@ -123,7 +120,7 @@ export function Vestigios() {
 
       <div className="px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 grid-rows-[180px_180px_180px] md:grid-rows-[220px_220px_220px] gap-4 mb-16">
         {TILES.map((t, i) => (
-          <Tile key={i} caption={t.caption} variant={t.h as "tall" | "wide"} index={i} img={t.img} />
+          <Tile key={i} caption={t.caption} variant={t.h as "tall" | "wide"} index={i} gradient={t.gradient} />
         ))}
       </div>
 
