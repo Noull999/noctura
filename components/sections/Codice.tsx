@@ -8,8 +8,8 @@ import { IlluminatedCapital } from "@/components/ui/IlluminatedCapital";
 import { Marquee } from "@/components/effects/Marquee";
 
 // Lazy load — solo se carga cuando llega al Códice
-const InfectedMaskScene = dynamic(
-  () => import("@/components/three/InfectedMaskScene").then((m) => m.InfectedMaskScene),
+const ChromeRibcageScene = dynamic(
+  () => import("@/components/three/ChromeRibcageScene").then((m) => m.ChromeRibcageScene),
   { ssr: false },
 );
 
@@ -177,7 +177,7 @@ export function Codice() {
         {/* Modelo 3D — solo desktop para no afectar mobile */}
         <div className="hidden md:block col-span-5 h-[500px] relative">
           <div className="absolute inset-0">
-            <InfectedMaskScene />
+            <ChromeRibcageScene />
           </div>
           {/* Halo crimson detrás del modelo */}
           <div
