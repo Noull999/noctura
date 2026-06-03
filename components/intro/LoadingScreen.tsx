@@ -81,8 +81,8 @@ export function LoadingScreen({
             <MidnightSpikedOrbScene />
           </div>
           <WireframeMorph />
-          <div className="relative z-10 flex flex-col items-center gap-10">
-            <h1 className="font-display text-5xl md:text-7xl tracking-tight leading-none">
+          <div className="relative z-10 flex flex-col items-center gap-10 text-ink">
+            <h1 className="font-display text-5xl md:text-7xl tracking-tight leading-none text-ink">
               {"{NÓCTURA}"}
             </h1>
 
