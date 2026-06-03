@@ -26,7 +26,38 @@ const pirata = Pirata_One({
 export const metadata: Metadata = {
   title: "{NÓCTURA} — RITO Y CÓDIGO",
   description:
-    "Showcase de experiencias visuales. Diseño premium, rito y código.",
+    "Construimos liturgias digitales. Cada pixel es un sacramento, cada animación un encantamiento. Diseño de experiencias — Puerto Montt, Chile.",
+  keywords: ["diseño web", "experiencias digitales", "three.js", "webgl", "ritual", "nóctura"],
+  authors: [{ name: "José Esteban Asencio" }],
+  creator: "José Esteban Asencio",
+  openGraph: {
+    type: "website",
+    locale: "es_CL",
+    url: "https://noctura.vercel.app",
+    title: "{NÓCTURA} — RITO Y CÓDIGO",
+    description:
+      "Construimos liturgias digitales. Cada pixel es un sacramento, cada animación un encantamiento.",
+    siteName: "NÓCTURA",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "NÓCTURA — RITO Y CÓDIGO",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "{NÓCTURA} — RITO Y CÓDIGO",
+    description:
+      "Construimos liturgias digitales. Cada pixel es un sacramento.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

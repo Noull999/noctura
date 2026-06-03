@@ -6,7 +6,7 @@ import { CoordsTag } from "@/components/ui/CoordsTag";
 import { RedButton } from "@/components/ui/RedButton";
 import { Marquee } from "@/components/effects/Marquee";
 
-export function FooterSection() {
+export function FooterSection({ onContact }: { onContact?: () => void }) {
   return (
     <footer className="relative w-full overflow-hidden bg-void border-t border-ash/30">
       <div className="relative py-32 px-6 md:px-12 flex flex-col items-center gap-12">
@@ -53,7 +53,12 @@ export function FooterSection() {
           </div>
           <div className="flex flex-col gap-1">
             <BracketLabel className="text-bone">CONTACTO</BracketLabel>
-            <span className="font-mono text-[10px] text-ash">JOSEESTEBANASENCIO@GMAIL.COM</span>
+            <button
+              onClick={onContact}
+              className="font-mono text-[10px] text-blood hover:text-pulse transition-colors text-left tracking-[0.1em]"
+            >
+              JOSEESTEBANASENCIO@GMAIL.COM
+            </button>
           </div>
         </div>
       </div>

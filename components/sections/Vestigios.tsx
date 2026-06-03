@@ -104,7 +104,7 @@ function Tile({
 
 export function Vestigios() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-void py-32">
+    <section id="vestigios" className="relative min-h-screen w-full overflow-hidden bg-void py-32">
       <div className="px-6 md:px-12 flex items-end justify-between mb-12">
         <div className="flex flex-col gap-3">
           <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>

@@ -12,7 +12,7 @@ const ParticleField = dynamic(
 
 export function Cuerpo() {
   return (
-    <section className="relative min-h-[140vh] w-full overflow-hidden bg-void">
+    <section id="cuerpo" className="relative min-h-[140vh] w-full overflow-hidden bg-void">
       <div className="sticky top-0 h-screen w-full">
         <div className="absolute inset-0">
           <ParticleField />

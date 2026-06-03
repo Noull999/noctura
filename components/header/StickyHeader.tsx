@@ -7,7 +7,7 @@ import { CoordsTag } from "@/components/ui/CoordsTag";
 import { RedButton } from "@/components/ui/RedButton";
 import { toggle, onChange, isPlaying } from "@/lib/audio";
 
-export function StickyHeader() {
+export function StickyHeader({ onContact }: { onContact?: () => void }) {
   const [show, setShow] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
 
@@ -63,7 +63,7 @@ export function StickyHeader() {
                 {audioOn ? "ON" : "OFF"}
               </span>
             </button>
-            <RedButton variant="filled">CONTACTO</RedButton>
+            <RedButton variant="filled" onClick={onContact}>CONTACTO</RedButton>
           </div>
         </motion.header>
       )}

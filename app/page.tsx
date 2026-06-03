@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { CRTOverlay } from "@/components/crt/Bezel";
 import { LoadingScreen } from "@/components/intro/LoadingScreen";
@@ -8,6 +8,10 @@ import { StickyHeader } from "@/components/header/StickyHeader";
 import { AsciiRainController } from "@/components/effects/AsciiRainController";
 import { AudioLoop } from "@/components/audio/AudioLoop";
 import { DripCursor } from "@/components/effects/DripCursor";
+import { GrainOverlay } from "@/components/effects/GrainOverlay";
+import { ScrollProgress } from "@/components/effects/ScrollProgress";
+import { ChapterNav } from "@/components/ui/ChapterNav";
+import { ContactModal } from "@/components/ui/ContactModal";
 import { Hero3D } from "@/components/sections/Hero3D";
 
 const Manifiesto = dynamic(() => import("@/components/sections/Manifiesto").then(m => ({ default: m.Manifiesto })), { ssr: false });
@@ -19,8 +23,8 @@ const FooterSection = dynamic(() => import("@/components/sections/Footer").then(
 export default function Home() {
   const [entered, setEntered] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
-  // Las secciones inferiores montan 1.5s después para no competir con el Hero
   const [sectionsReady, setSectionsReady] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
     if (!entered) return;
@@ -30,7 +34,13 @@ export default function Home() {
 
   return (
     <main className="relative w-full bg-void text-ink">
+      {/* Globales — siempre activos */}
       <DripCursor />
+      <GrainOverlay />
+      <ScrollProgress />
+      <ChapterNav />
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+
       <LoadingScreen onEnter={(withAudio) => {
         setAudioEnabled(withAudio);
         setEntered(true);
@@ -41,8 +51,8 @@ export default function Home() {
           {audioEnabled && <AudioLoop />}
           <CRTOverlay />
           <AsciiRainController />
-          <StickyHeader />
-          <Hero3D onBreak={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })} />
+          <StickyHeader onContact={() => setContactOpen(true)} />
+          <Hero3D onBreak={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })} />
         </>
       )}
 
@@ -52,7 +62,7 @@ export default function Home() {
           <Origen />
           <Cuerpo />
           <Vestigios />
-          <FooterSection />
+          <FooterSection onContact={() => setContactOpen(true)} />
         </>
       )}
     </main>

@@ -20,6 +20,7 @@ export function Manifiesto() {
 
   return (
     <section
+      id="manifiesto"
       ref={ref}
       className="relative min-h-screen w-full overflow-hidden bg-surface flex items-center justify-start px-6 md:px-16 py-32"
     >
