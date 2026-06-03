@@ -7,13 +7,7 @@ import { WireframeMorph } from "@/components/effects/WireframeMorph";
 import { RedButton } from "@/components/ui/RedButton";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { MidnightSpikedOrbScene } from "@/components/three/MidnightSpikedOrbScene";
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
-// Precarga los modelos principales mientras el usuario ve el loading screen
-useLoader.preload(GLTFLoader, "/models/meshy-model.glb");
-useLoader.preload(GLTFLoader, "/models/Meshy_AI_Chrome_Demon_Doll_0602204809_texture.glb");
-useLoader.preload(GLTFLoader, "/models/Meshy_AI_The_Iron_Eye_0602205245_texture.glb");
+// useLoader hooks removed - they cannot be used outside of a Canvas context
 
 export function LoadingScreen({
   onEnter,
