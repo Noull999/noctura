@@ -3,35 +3,52 @@
 import { useEffect, useState } from "react";
 import { AsciiRain } from "./AsciiRain";
 
-const TRIGGERS = [0.18, 0.30, 0.46, 0.72];
-const WINDOW = 0.08;
+// IDs de secciones que disparan ASCII rain al ENTRAR al viewport.
+// Mucho más preciso que basarse en porcentaje de scroll global.
+const TRIGGER_IDS = ["origen", "cuerpo", "vestigios"];
 
 export function AsciiRainController() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-    let lastZone = -1;
+    const triggered = new Set<string>();
+    let hideTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const max = doc.scrollHeight - window.innerHeight;
-      if (max <= 0) return;
-      const t = window.scrollY / max;
-      const zone = TRIGGERS.findIndex((tp) => Math.abs(t - tp) < WINDOW);
-      if (zone !== -1 && zone !== lastZone) {
-        lastZone = zone;
-        setActive(true);
-        if (timeout) clearTimeout(timeout);
-        timeout = setTimeout(() => setActive(false), 1200);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !triggered.has(entry.target.id)) {
+            triggered.add(entry.target.id);
+            setActive(true);
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => setActive(false), 1100);
+          }
+        }
+      },
+      {
+        // Dispara cuando el TOP de la sección entra a un 65% de la altura del viewport
+        // (es decir, justo antes de que el usuario llegue a la sección)
+        rootMargin: "-30% 0px -35% 0px",
+        threshold: 0,
       }
-      if (zone === -1) lastZone = -1;
+    );
+
+    // Esperar a que las secciones estén en el DOM
+    const attach = () => {
+      for (const id of TRIGGER_IDS) {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      }
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Intento inicial + reintento por si las secciones se montan tarde (dynamic imports)
+    attach();
+    const retry = setTimeout(attach, 2000);
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (timeout) clearTimeout(timeout);
+      observer.disconnect();
+      clearTimeout(retry);
+      if (hideTimer) clearTimeout(hideTimer);
     };
   }, []);
 

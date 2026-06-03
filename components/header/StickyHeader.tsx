@@ -19,12 +19,11 @@ const EASTER_EGG_MESSAGES = [
 export function StickyHeader({ onContact }: { onContact?: () => void }) {
   const [show, setShow] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
-
-  // Easter egg: triple clic en ✠
+  const [clickCount, setClickCount] = useState(0);
   const [eggActive, setEggActive] = useState(false);
   const [eggMsg, setEggMsg] = useState("");
-  const clickCount = useRef(0);
-  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const eggTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -39,32 +38,28 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
     };
   }, []);
 
+  // Cuando se alcanzan 3 clics, disparar easter egg
   useEffect(() => {
-    return () => {
-      if (clickTimer.current) clearTimeout(clickTimer.current);
-      if (eggTimer.current) clearTimeout(eggTimer.current);
-    };
-  }, []);
-
-  const handleCrossClick = () => {
-    clickCount.current += 1;
-    if (clickTimer.current) clearTimeout(clickTimer.current);
-
-    // Resetear contador si no llega a 3 en 600ms
-    clickTimer.current = setTimeout(() => {
-      clickCount.current = 0;
-    }, 600);
-
-    if (clickCount.current >= 3) {
-      clickCount.current = 0;
-      if (clickTimer.current) clearTimeout(clickTimer.current);
+    if (clickCount >= 3) {
       const msg = EASTER_EGG_MESSAGES[Math.floor(Math.random() * EASTER_EGG_MESSAGES.length)];
       setEggMsg(msg);
       setEggActive(true);
+      setClickCount(0);
       if (eggTimer.current) clearTimeout(eggTimer.current);
       eggTimer.current = setTimeout(() => setEggActive(false), 3000);
+    } else if (clickCount > 0) {
+      // Resetear contador si no llega a 3 dentro de 800ms
+      if (resetTimer.current) clearTimeout(resetTimer.current);
+      resetTimer.current = setTimeout(() => setClickCount(0), 800);
     }
-  };
+  }, [clickCount]);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimer.current) clearTimeout(resetTimer.current);
+      if (eggTimer.current) clearTimeout(eggTimer.current);
+    };
+  }, []);
 
   return (
     <AnimatePresence>
@@ -79,20 +74,18 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
           {/* Logo + nombre */}
           <div className="flex items-center gap-3">
             <button
-              onClick={handleCrossClick}
-              className="font-calig text-2xl leading-none text-ink hover:text-blood transition-colors select-none relative"
+              type="button"
+              onClick={() => setClickCount((c) => c + 1)}
+              className={`font-calig text-2xl leading-none select-none cursor-pointer transition-colors ${
+                eggActive ? "text-blood" : clickCount > 0 ? "text-pulse" : "text-ink hover:text-blood"
+              }`}
+              style={{
+                transform: eggActive ? "rotate(5deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease, color 0.3s ease",
+              }}
               aria-label="Logo Nóctura"
             >
-              <motion.span
-                animate={eggActive ? {
-                  rotate: [0, -5, 5, -5, 5, 0],
-                  color: ["#ededed", "#c0202b", "#e63946", "#c0202b", "#ededed"],
-                } : {}}
-                transition={{ duration: 0.5 }}
-                style={{ display: "block" }}
-              >
-                ✠
-              </motion.span>
+              ✠
             </button>
 
             <div className="flex flex-col gap-0.5">
