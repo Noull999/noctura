@@ -122,10 +122,3 @@ html.lenis body {
 .marquee-track {
   transform: translate3d(0, 0, 0);
 }
-
-/* Smooth cursor movement */
-@supports (contain: paint) {
-  * {
-    contain: layout style paint;
-  }
-}
