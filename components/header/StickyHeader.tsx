@@ -31,39 +31,38 @@ export function StickyHeader() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.35 }}
-          className="fixed top-0 left-0 right-0 z-[55] grid grid-cols-12 items-start gap-4 px-6 py-5 bg-void/90 border-b border-ash/30"
+          className="fixed top-0 left-0 right-0 z-[55] flex items-center justify-between gap-4 px-6 py-4 bg-void/90 border-b border-ash/30"
         >
-          <div className="col-span-1 font-calig text-3xl leading-none text-ink">
-            ✠
+          {/* Logo + nombre */}
+          <div className="flex items-center gap-3">
+            <span className="font-calig text-2xl leading-none text-ink">✠</span>
+            <div className="flex flex-col gap-0.5">
+              <BracketLabel>NÓCTURA</BracketLabel>
+              <BracketLabel className="text-bone normal-case tracking-[0.2em] hidden md:block">
+                RITO Y CÓDIGO
+              </BracketLabel>
+            </div>
           </div>
-          <div className="col-span-3 flex flex-col gap-1">
-            <BracketLabel>NÓCTURA</BracketLabel>
-            <BracketLabel className="text-bone normal-case tracking-[0.2em]">
-              DISEÑO DE EXPERIENCIAS
-            </BracketLabel>
-            <BracketLabel className="text-bone normal-case tracking-[0.2em]">
-              RITO Y CÓDIGO
-            </BracketLabel>
-          </div>
-          <div className="col-span-3 flex flex-col gap-1">
+
+          {/* Centro — coords, solo desktop */}
+          <div className="hidden md:flex flex-col gap-1 items-center">
             <CoordsTag />
             <BracketLabel className="text-bone normal-case tracking-[0.2em]">
               PUERTO MONTT / CL
             </BracketLabel>
           </div>
-          <div className="col-span-3 flex flex-col gap-1">
+
+          {/* Derecha — audio + contacto */}
+          <div className="flex items-center gap-4">
             <button
               onClick={() => toggle()}
-              className="text-left font-mono text-xs uppercase tracking-[0.25em] text-bone hover:text-blood transition-colors"
+              className="font-mono text-xs uppercase tracking-[0.25em] text-bone hover:text-blood transition-colors"
             >
-              {"{SONIDO}"}
+              {"{SONIDO}"}{" "}
+              <span className={audioOn ? "text-blood" : "text-ash"}>
+                {audioOn ? "ON" : "OFF"}
+              </span>
             </button>
-            <span className="font-mono text-xs uppercase tracking-[0.25em]">
-              <span className="text-blood">ES</span>{" "}
-              <span className="text-bone">{audioOn ? "ENCENDIDO" : "APAGADO"}</span>
-            </span>
-          </div>
-          <div className="col-span-2 flex justify-end">
             <RedButton variant="filled">CONTACTO</RedButton>
           </div>
         </motion.header>
