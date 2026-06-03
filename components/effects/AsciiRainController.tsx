@@ -5,7 +5,7 @@ import { AsciiRain } from "./AsciiRain";
 
 // IDs de secciones que disparan ASCII rain al ENTRAR al viewport.
 // Mucho más preciso que basarse en porcentaje de scroll global.
-const TRIGGER_IDS = ["origen", "cuerpo", "vestigios"];
+const TRIGGER_IDS = ["manifiesto", "origen", "cuerpo", "vestigios"];
 
 export function AsciiRainController() {
   const [active, setActive] = useState(false);
