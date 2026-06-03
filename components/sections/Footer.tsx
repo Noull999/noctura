@@ -49,11 +49,11 @@ export function FooterSection() {
           </div>
           <div className="flex flex-col gap-1">
             <CoordsTag />
-            <span className="font-mono text-[10px] text-ash">SANTIAGO / CL</span>
+            <span className="font-mono text-[10px] text-ash">PUERTO MONTT / CL</span>
           </div>
           <div className="flex flex-col gap-1">
             <BracketLabel className="text-bone">CONTACTO</BracketLabel>
-            <span className="font-mono text-[10px] text-ash">HELLO@NOCTURA.RITUAL</span>
+            <span className="font-mono text-[10px] text-ash">JOSEESTEBANASENCIO@GMAIL.COM</span>
           </div>
         </div>
       </div>

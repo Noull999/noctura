@@ -48,7 +48,7 @@ export function StickyHeader() {
           <div className="col-span-3 flex flex-col gap-1">
             <CoordsTag />
             <BracketLabel className="text-bone normal-case tracking-[0.2em]">
-              SANTIAGO / CL
+              PUERTO MONTT / CL
             </BracketLabel>
           </div>
           <div className="col-span-3 flex flex-col gap-1">

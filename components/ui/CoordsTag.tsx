@@ -8,7 +8,7 @@ export function CoordsTag({ className }: { className?: string }) {
         className,
       )}
     >
-      33,4489° S / 70,6693° O
+      41,4693° S / 72,9424° O
     </span>
   );
 }

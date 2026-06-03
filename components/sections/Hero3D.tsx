@@ -18,7 +18,7 @@ export function Hero3D({ onBreak }: { onBreak?: () => void } = {}) {
           <div className="font-calig text-4xl md:text-5xl leading-none text-ink">
             ✠
           </div>
-          <BracketLabel className="text-bone">{`33,4489°S / 70,6693°O`}</BracketLabel>
+          <BracketLabel className="text-bone">{`41,4693°S / 72,9424°O`}</BracketLabel>
         </div>
 
         <div className="grid grid-cols-12 gap-4 items-end">
