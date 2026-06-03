@@ -68,7 +68,7 @@ export function AsciiRain({
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-[60] transition-opacity duration-700"
+      className="pointer-events-none fixed inset-0 z-[60] transition-opacity duration-200"
       style={{ opacity: active ? 1 : 0 }}
     />
   );

@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { AsciiRain } from "./AsciiRain";
 
-const TRIGGERS = [0.18, 0.30, 0.55, 0.75];
-const WINDOW = 0.06;
+const TRIGGERS = [0.18, 0.30, 0.46, 0.72];
+const WINDOW = 0.08;
 
 export function AsciiRainController() {
   const [active, setActive] = useState(false);
@@ -23,7 +23,7 @@ export function AsciiRainController() {
         lastZone = zone;
         setActive(true);
         if (timeout) clearTimeout(timeout);
-        timeout = setTimeout(() => setActive(false), 800);
+        timeout = setTimeout(() => setActive(false), 1200);
       }
       if (zone === -1) lastZone = -1;
     };

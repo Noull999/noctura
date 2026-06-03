@@ -20,10 +20,11 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
   const [show, setShow] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
 
-  // Easter egg: hold ✠ for 2s
+  // Easter egg: triple clic en ✠
   const [eggActive, setEggActive] = useState(false);
   const [eggMsg, setEggMsg] = useState("");
-  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clickCount = useRef(0);
+  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const eggTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -38,30 +39,32 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
     };
   }, []);
 
-  const startHold = () => {
-    if (holdTimer.current) clearTimeout(holdTimer.current);
-    holdTimer.current = setTimeout(() => {
+  useEffect(() => {
+    return () => {
+      if (clickTimer.current) clearTimeout(clickTimer.current);
+      if (eggTimer.current) clearTimeout(eggTimer.current);
+    };
+  }, []);
+
+  const handleCrossClick = () => {
+    clickCount.current += 1;
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+
+    // Resetear contador si no llega a 3 en 600ms
+    clickTimer.current = setTimeout(() => {
+      clickCount.current = 0;
+    }, 600);
+
+    if (clickCount.current >= 3) {
+      clickCount.current = 0;
+      if (clickTimer.current) clearTimeout(clickTimer.current);
       const msg = EASTER_EGG_MESSAGES[Math.floor(Math.random() * EASTER_EGG_MESSAGES.length)];
       setEggMsg(msg);
       setEggActive(true);
       if (eggTimer.current) clearTimeout(eggTimer.current);
       eggTimer.current = setTimeout(() => setEggActive(false), 3000);
-    }, 800);
-  };
-
-  const cancelHold = () => {
-    if (holdTimer.current) {
-      clearTimeout(holdTimer.current);
-      holdTimer.current = null;
     }
   };
-
-  useEffect(() => {
-    return () => {
-      if (holdTimer.current) clearTimeout(holdTimer.current);
-      if (eggTimer.current) clearTimeout(eggTimer.current);
-    };
-  }, []);
 
   return (
     <AnimatePresence>
@@ -75,17 +78,9 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
         >
           {/* Logo + nombre */}
           <div className="flex items-center gap-3">
-            {/* ✠ con easter egg al mantener 2s */}
             <button
+              onClick={handleCrossClick}
               className="font-calig text-2xl leading-none text-ink hover:text-blood transition-colors select-none relative"
-              onPointerDown={(e) => {
-                e.currentTarget.setPointerCapture(e.pointerId);
-                startHold();
-              }}
-              onPointerUp={cancelHold}
-              onPointerCancel={cancelHold}
-              onContextMenu={(e) => e.preventDefault()}
-              title="..."
               aria-label="Logo Nóctura"
             >
               <motion.span
@@ -112,11 +107,11 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
           <AnimatePresence>
             {eggActive && (
               <motion.div
-                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 font-mono text-[10px] tracking-[0.3em] text-blood bg-void/95 border border-blood/40 px-4 py-2 pointer-events-none"
+                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 font-mono text-[10px] tracking-[0.3em] text-blood bg-void/95 border border-blood/40 px-4 py-2 pointer-events-none whitespace-nowrap"
                 initial={{ opacity: 0, y: -6, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -6, scale: 0.95 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.2 }}
               >
                 {eggMsg}
               </motion.div>
