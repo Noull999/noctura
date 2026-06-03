@@ -16,11 +16,11 @@ function GlitchItem({ label, highlight }: { label: string; highlight?: boolean }
         highlight ? "bg-blood text-void px-1" : "text-ink"
       )}
     >
-      {/* Capas glitch — solo en hover */}
+      {/* Capas glitch — activas inmediatamente en hover */}
       <span
         aria-hidden
         className="absolute inset-0 text-pulse opacity-0 group-hover:opacity-100 px-[inherit]"
-        style={{ animation: "glitch-a 600ms infinite steps(1)" }}
+        style={{ animation: "glitch-a 400ms infinite steps(1)", animationDelay: "0ms" }}
       >
         {"{"}
         {label}
@@ -29,14 +29,14 @@ function GlitchItem({ label, highlight }: { label: string; highlight?: boolean }
       <span
         aria-hidden
         className="absolute inset-0 text-blood opacity-0 group-hover:opacity-100 px-[inherit]"
-        style={{ animation: "glitch-b 600ms infinite steps(1)" }}
+        style={{ animation: "glitch-b 400ms infinite steps(1)", animationDelay: "0ms" }}
       >
         {"{"}
         {label}
         {"}"}
       </span>
-      {/* Texto real */}
-      <span className="relative transition-opacity duration-150 group-hover:opacity-0">
+      {/* Texto real — desaparece inmediatamente en hover */}
+      <span className="relative group-hover:opacity-0" style={{ transition: "opacity 0ms" }}>
         {"{"}
         {label}
         {"}"}

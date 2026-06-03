@@ -39,16 +39,21 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
   }, []);
 
   const startHold = () => {
+    if (holdTimer.current) clearTimeout(holdTimer.current);
     holdTimer.current = setTimeout(() => {
       const msg = EASTER_EGG_MESSAGES[Math.floor(Math.random() * EASTER_EGG_MESSAGES.length)];
       setEggMsg(msg);
       setEggActive(true);
+      if (eggTimer.current) clearTimeout(eggTimer.current);
       eggTimer.current = setTimeout(() => setEggActive(false), 3000);
-    }, 2000);
+    }, 1500); // reducido a 1.5s para que sea más fácil de descubrir
   };
 
   const cancelHold = () => {
-    if (holdTimer.current) clearTimeout(holdTimer.current);
+    if (holdTimer.current) {
+      clearTimeout(holdTimer.current);
+      holdTimer.current = null;
+    }
   };
 
   useEffect(() => {
@@ -73,11 +78,10 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
             {/* ✠ con easter egg al mantener 2s */}
             <button
               className="font-calig text-2xl leading-none text-ink hover:text-blood transition-colors select-none relative"
-              onMouseDown={startHold}
-              onMouseUp={cancelHold}
-              onMouseLeave={cancelHold}
-              onTouchStart={startHold}
-              onTouchEnd={cancelHold}
+              onPointerDown={startHold}
+              onPointerUp={cancelHold}
+              onPointerLeave={cancelHold}
+              onPointerCancel={cancelHold}
               title="..."
               aria-label="Logo Nóctura"
             >

@@ -32,7 +32,7 @@ function TypeWriter({ text, onDone }: { text: string; onDone?: () => void }) {
         clearInterval(id);
         onDone?.();
       }
-    }, 38);
+    }, 55); // más lento para que se lea bien
     return () => clearInterval(id);
   }, [text, onDone]);
 
@@ -80,9 +80,8 @@ export function LoadingScreen({
   useEffect(() => {
     let v = 0;
     const id = setInterval(() => {
-      v = Math.min(100, v + Math.random() * 5 + 1);
+      v = Math.min(100, v + Math.random() * 2 + 0.5); // más lento
       setPercent(Math.floor(v));
-      // Cambiar paso ritual según el progreso
       const idx = Math.min(
         Math.floor((v / 100) * RITUAL_STEPS.length),
         RITUAL_STEPS.length - 1
@@ -92,7 +91,7 @@ export function LoadingScreen({
         clearInterval(id);
         setTimeout(() => setReady(true), 600);
       }
-    }, 80);
+    }, 120); // intervalo más largo
     return () => clearInterval(id);
   }, []);
 
@@ -182,9 +181,9 @@ export function LoadingScreen({
                     ENTRAR SIN AUDIO
                   </RedButton>
                 </div>
-                <BracketLabel className="mt-4 text-bone normal-case tracking-[0.2em] text-center max-w-xs">
-                  ESTA EXPERIENCIA INCLUYE SONIDO · PARA LA ATMÓSFERA DESEADA, ACTIVE EL AUDIO
-                </BracketLabel>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-bone text-center max-w-xs leading-relaxed">
+                  {"{"} ESTA EXPERIENCIA INCLUYE SONIDO · PARA LA ATMÓSFERA DESEADA, ACTIVE EL AUDIO {"}"}
+                </p>
               </motion.div>
             )}
           </div>
