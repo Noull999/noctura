@@ -8,7 +8,7 @@ import { ChromeDemonDollScene } from "@/components/three/ChromeDemonDollScene";
 
 export function Origen() {
   return (
-    <section id="origen" className="relative min-h-screen w-full overflow-hidden bg-void">
+    <section id="origen" className="relative z-[1] min-h-screen w-full overflow-hidden bg-void">
       {/* Model ocupa solo la mitad derecha para no tapar el texto */}
       <div className="absolute inset-y-0 right-0 w-full md:w-2/3 opacity-90">
         <ChromeDemonDollScene />

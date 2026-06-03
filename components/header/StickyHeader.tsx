@@ -78,10 +78,13 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
             {/* ✠ con easter egg al mantener 2s */}
             <button
               className="font-calig text-2xl leading-none text-ink hover:text-blood transition-colors select-none relative"
-              onPointerDown={startHold}
+              onPointerDown={(e) => {
+                e.currentTarget.setPointerCapture(e.pointerId);
+                startHold();
+              }}
               onPointerUp={cancelHold}
-              onPointerLeave={cancelHold}
               onPointerCancel={cancelHold}
+              onContextMenu={(e) => e.preventDefault()}
               title="..."
               aria-label="Logo Nóctura"
             >
