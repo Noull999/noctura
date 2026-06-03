@@ -66,44 +66,13 @@ export function DripCursor() {
 
       {/* Cruz principal */}
       <motion.div
-        className="pointer-events-none fixed z-[9999]"
+        className="pointer-events-none fixed z-[9999] text-2xl text-blood -translate-x-1/2 -translate-y-1/2"
         style={{
           x: mousePos.x,
           y: mousePos.y,
         }}
       >
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          className="-translate-x-1/2 -translate-y-1/2"
-          aria-hidden
-        >
-          {/* Cruz */}
-          <line
-            x1="16"
-            y1="4"
-            x2="16"
-            y2="28"
-            stroke="#c0202b"
-            strokeWidth="2"
-            opacity="0.8"
-          />
-          <line
-            x1="4"
-            y1="16"
-            x2="28"
-            y2="16"
-            stroke="#c0202b"
-            strokeWidth="2"
-            opacity="0.8"
-          />
-          {/* Pequeños puntos en los extremos */}
-          <circle cx="16" cy="4" r="1.5" fill="#c0202b" opacity="0.6" />
-          <circle cx="16" cy="28" r="1.5" fill="#c0202b" opacity="0.6" />
-          <circle cx="4" cy="16" r="1.5" fill="#c0202b" opacity="0.6" />
-          <circle cx="28" cy="16" r="1.5" fill="#c0202b" opacity="0.6" />
-        </svg>
+        ✠
       </motion.div>
 
       {/* Goteos de sangre */}
