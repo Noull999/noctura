@@ -16,7 +16,7 @@ export function DripCursor() {
   const [drips, setDrips] = useState<Drip[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const lastDripTimeRef = useRef(0);
-  const frameIdRef = useRef<number>();
+  const frameIdRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
