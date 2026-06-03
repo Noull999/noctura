@@ -61,10 +61,11 @@ export function FooterSection() {
       <Marquee
         items={[
           { label: "NÓCTURA" },
+          { label: "EL RITO NO TERMINA" },
           { label: "2026" },
-          { label: "TODOS LOS DERECHOS" },
-          { label: "RITO Y CÓDIGO" },
-          { label: "VOLVER ARRIBA" },
+          { label: "TODO LO OSCURO TIENE FORMA" },
+          { label: "VUELVE" },
+          { label: "SANGRE Y CÓDIGO" },
         ]}
         duration={28}
       />

@@ -41,14 +41,14 @@ export function Cuerpo() {
 
       <Marquee
         items={[
-          { label: "PARTÍCULAS" },
-          { label: "SHADER" },
-          { label: "VÉRTICE" },
+          { label: "CARNE DIGITAL" },
+          { label: "PIEL DE SOMBRA" },
+          { label: "VÉRTEBRA" },
           { index: "002", label: "CUERPO", highlight: true },
-          { label: "WEBGL" },
-          { label: "POLVO" },
-          { label: "DISPERSIÓN" },
-          { label: "MATERIA" },
+          { label: "DISOLUCIÓN" },
+          { label: "LATIDO ROTO" },
+          { label: "LO QUE HABITA" },
+          { label: "ENTRE DOS MUNDOS" },
         ]}
       />
     </section>

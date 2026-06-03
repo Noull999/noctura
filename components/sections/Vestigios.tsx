@@ -126,13 +126,14 @@ export function Vestigios() {
 
       <Marquee
         items={[
-          { label: "GRABADO" },
-          { label: "TINTA" },
-          { label: "RELICARIO" },
+          { label: "HUESO QUEMADO" },
+          { label: "CICATRIZ" },
+          { label: "LO QUE QUEDA" },
           { index: "003", label: "VESTIGIOS", highlight: true },
-          { label: "TEXTURA" },
-          { label: "MEMORIA" },
-          { label: "FRAGMENTO" },
+          { label: "RESIDUO SAGRADO" },
+          { label: "MARCA SIN NOMBRE" },
+          { label: "ESPECTRO" },
+          { label: "RUINA VIVA" },
         ]}
       />
     </section>
