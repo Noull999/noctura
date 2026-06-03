@@ -19,7 +19,7 @@ function ChromeRibcage() {
   })
 
   return (
-    <group ref={ref} scale={15} position={[0, 0, 0]}>
+    <group ref={ref} scale={18} position={[0, 0, 0]}>
       <primitive object={gltf.scene} />
     </group>
   )
@@ -28,7 +28,7 @@ function ChromeRibcage() {
 export function ChromeRibcageScene() {
   return (
     <SceneCanvas
-      camera={{ position: [0, 5, 35], fov: 70 }}
+      camera={{ position: [0, 4, 28], fov: 65 }}
       style={{ background: 'transparent' }}
       dpr={1}
     >

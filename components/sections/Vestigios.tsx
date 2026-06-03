@@ -112,8 +112,8 @@ function Tile({
 
 export function Vestigios() {
   return (
-    <section id="vestigios" className="relative min-h-screen w-full overflow-hidden bg-void py-32">
-      <div className="px-6 md:px-12 grid grid-cols-12 gap-4 mb-12 md:mb-16 items-center">
+    <section id="vestigios" className="relative min-h-screen w-full overflow-hidden bg-void py-20 md:py-24">
+      <div className="px-6 md:px-12 grid grid-cols-12 gap-4 mb-12 md:mb-16 items-start">
         <div className="col-span-12 md:col-span-7 flex flex-col gap-3">
           <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
           <h2 className="font-display text-[14vw] md:text-[9vw] leading-[0.85] tracking-tight">
@@ -131,7 +131,7 @@ export function Vestigios() {
         </div>
 
         {/* Modelo 3D — solo desktop */}
-        <div className="hidden md:block col-span-5 h-[500px] relative">
+        <div className="hidden md:block col-span-5 h-[600px] relative">
           <div className="absolute inset-0">
             <CrimsonSkullScene />
           </div>

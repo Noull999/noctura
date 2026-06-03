@@ -29,52 +29,28 @@ interface CodexEntry {
 // Reliquias / proyectos — tus repos reales de GitHub
 const ENTRIES: CodexEntry[] = [
   {
-    title: "MAREA ALERTA",
-    description: "Sistema de alertas marítimas en tiempo real.",
-    href: "https://marea-alerta.vercel.app",
-    category: "RELIQUIA · I",
-    gradient: "linear-gradient(135deg, #0a1a2a 0%, #1a0a1a 50%, #0d0d0d 100%)",
-    glyph: "≈",
-  },
-  {
     title: "PORTFOLIO V4",
-    description: "Three.js, GSAP y geometría sagrada.",
+    description: "Portfolio personal con Three.js, GSAP y geometría sagrada.",
     href: "https://portfolio-v4-rho-opal.vercel.app",
-    category: "RELIQUIA · II",
+    category: "RELIQUIA · I",
     gradient: "linear-gradient(45deg, #1a1a1a 0%, #3a0a0a 50%, #0d0d0d 100%)",
     glyph: "✠",
   },
   {
-    title: "WORKLY",
-    description: "Página empresarial multifunciones.",
-    href: "https://github.com/Noull999/Workly",
-    category: "RELIQUIA · III",
-    gradient: "linear-gradient(180deg, #2a1a1a 0%, #1a0a3a 50%, #0a0a1a 100%)",
-    glyph: "◆",
-  },
-  {
-    title: "DASHBOARD INDUSTRIAL",
-    description: "Sensores en tiempo real para plantas pesqueras.",
-    href: "https://github.com/Noull999/dashboard-industrial",
-    category: "RELIQUIA · IV",
-    gradient: "linear-gradient(225deg, #1a1a1a 0%, #3a1a0a 50%, #0d0d0d 100%)",
-    glyph: "▣",
-  },
-  {
     title: "MUSIC DOWNLOADER",
-    description: "SoundCloud con auto-sync y detección de duplicados.",
+    description: "Descarga desde SoundCloud con auto-sync, detección de duplicados y multi-formato.",
     href: "https://github.com/Noull999/music-downloader",
-    category: "RELIQUIA · V",
+    category: "RELIQUIA · II",
     gradient: "linear-gradient(90deg, #0d0d0d 0%, #2a0a0a 50%, #1a1a2a 100%)",
     glyph: "♪",
   },
   {
-    title: "MUUUSIK",
-    description: "Bot de música para Discord.",
-    href: "https://github.com/Noull999/MUUUSIK",
-    category: "RELIQUIA · VI",
-    gradient: "linear-gradient(315deg, #1a0a1a 0%, #2a1a0a 50%, #0a1a1a 100%)",
-    glyph: "⌬",
+    title: "SAAS AGENDAMIENTO",
+    description: "Plataforma SaaS para agendamiento de servicios. Multi-tenant, dashboard, reservas.",
+    href: "https://github.com/Noull999/saas-agendamiento",
+    category: "RELIQUIA · III",
+    gradient: "linear-gradient(180deg, #2a1a1a 0%, #1a0a3a 50%, #0a0a1a 100%)",
+    glyph: "◆",
   },
 ];
 
@@ -155,9 +131,9 @@ export function Codice() {
   return (
     <section
       id="codice"
-      className="relative z-[1] min-h-screen w-full overflow-hidden bg-void py-32"
+      className="relative z-[1] min-h-screen w-full overflow-hidden bg-void py-20 md:py-24"
     >
-      <div className="px-6 md:px-12 grid grid-cols-12 gap-4 mb-12 md:mb-16 items-center">
+      <div className="px-6 md:px-12 grid grid-cols-12 gap-4 mb-12 md:mb-16 items-start">
         <div className="col-span-12 md:col-span-7 flex flex-col gap-3">
           <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
           <h2 className="font-display text-[14vw] md:text-[9vw] leading-[0.85] tracking-tight">
@@ -175,7 +151,7 @@ export function Codice() {
         </div>
 
         {/* Modelo 3D — solo desktop para no afectar mobile */}
-        <div className="hidden md:block col-span-5 h-[500px] relative">
+        <div className="hidden md:block col-span-5 h-[600px] relative">
           <div className="absolute inset-0">
             <ChromeRibcageScene />
           </div>
