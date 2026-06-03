@@ -56,6 +56,10 @@ export function LoadingScreen({
 
   const handleEnter = (withAudio: boolean) => {
     setOpen(false);
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+    const w = window as unknown as { __lenis?: { start: () => void } };
+    w.__lenis?.start();
     setTimeout(() => onEnter(withAudio), 700);
   };
 
