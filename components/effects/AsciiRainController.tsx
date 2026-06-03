@@ -1,39 +1,43 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AsciiRain } from "./AsciiRain";
 
 // IDs de secciones que disparan ASCII rain al ENTRAR al viewport.
-// Mucho más preciso que basarse en porcentaje de scroll global.
 const TRIGGER_IDS = ["manifiesto", "origen", "cuerpo", "vestigios", "codice"];
+
+const DURATION = 1300; // cuánto dura visible
+const COOLDOWN = 2000; // tiempo mínimo entre triggers
 
 export function AsciiRainController() {
   const [active, setActive] = useState(false);
+  const lastTriggerRef = useRef(0);
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const triggered = new Set<string>();
-    let hideTimer: ReturnType<typeof setTimeout> | null = null;
+    const trigger = () => {
+      const now = Date.now();
+      if (now - lastTriggerRef.current < COOLDOWN) return;
+      lastTriggerRef.current = now;
+      setActive(true);
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = setTimeout(() => setActive(false), DURATION);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting && !triggered.has(entry.target.id)) {
-            triggered.add(entry.target.id);
-            setActive(true);
-            if (hideTimer) clearTimeout(hideTimer);
-            hideTimer = setTimeout(() => setActive(false), 1100);
-          }
+          if (entry.isIntersecting) trigger();
         }
       },
       {
-        // Dispara cuando el TOP de la sección entra a un 65% de la altura del viewport
-        // (es decir, justo antes de que el usuario llegue a la sección)
-        rootMargin: "-30% 0px -35% 0px",
+        // Dispara cuando la sección entra a la franja vertical central
+        // (zona detectable: 15% del top al 50% del bottom)
+        rootMargin: "-15% 0px -50% 0px",
         threshold: 0,
       }
     );
 
-    // Esperar a que las secciones estén en el DOM
     const attach = () => {
       for (const id of TRIGGER_IDS) {
         const el = document.getElementById(id);
@@ -48,7 +52,7 @@ export function AsciiRainController() {
     return () => {
       observer.disconnect();
       clearTimeout(retry);
-      if (hideTimer) clearTimeout(hideTimer);
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
     };
   }, []);
 
