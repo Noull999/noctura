@@ -18,7 +18,7 @@ function CrimsonSkull() {
   })
 
   return (
-    <group ref={ref} scale={17} position={[0, 0, 0]}>
+    <group ref={ref} scale={17} position={[-4, 0, 0]}>
       <primitive object={gltf.scene} />
     </group>
   )
