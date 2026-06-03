@@ -131,7 +131,7 @@ export function Codice() {
   return (
     <section
       id="codice"
-      className="relative z-[1] min-h-screen w-full overflow-hidden bg-void py-20 md:py-24"
+      className="relative z-[1] min-h-screen w-full overflow-hidden bg-void pt-6 pb-20"
     >
       <div className="px-6 md:px-12 grid grid-cols-12 gap-4 mb-12 md:mb-16 items-start">
         <div className="col-span-12 md:col-span-7 flex flex-col gap-3">

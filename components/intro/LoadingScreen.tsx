@@ -80,7 +80,7 @@ export function LoadingScreen({
   useEffect(() => {
     let v = 0;
     const id = setInterval(() => {
-      v = Math.min(100, v + Math.random() * 2 + 0.5); // más lento
+      v = Math.min(100, v + Math.random() * 2 + 0.5); // avg 1.5 por tick
       setPercent(Math.floor(v));
       const idx = Math.min(
         Math.floor((v / 100) * RITUAL_STEPS.length),
@@ -91,7 +91,7 @@ export function LoadingScreen({
         clearInterval(id);
         setTimeout(() => setReady(true), 600);
       }
-    }, 120); // intervalo más largo
+    }, 110); // 110ms × ~67 ticks ≈ 7.4s + 0.6s buffer ≈ 8s total
     return () => clearInterval(id);
   }, []);
 
