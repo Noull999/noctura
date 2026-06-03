@@ -2,12 +2,28 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { SplitTextReveal } from "@/components/effects/SplitTextReveal";
 import { BracketLabel } from "@/components/ui/BracketLabel";
 import { CoordsTag } from "@/components/ui/CoordsTag";
 import { IronEyeScene } from "@/components/three/IronEyeScene";
 
-const MANIFIESTO = `Construimos liturgias digitales. Cada pixel es un sacramento, cada animación un encantamiento. El detalle es nuestra teología y el silencio entre transiciones, oración.`;
+// Versículos del manifiesto, divididos para enumerarlos
+const VERSES = [
+  {
+    n: "I",
+    text: "Construimos liturgias digitales.",
+  },
+  {
+    n: "II",
+    text: "Cada pixel es un sacramento, cada animación un encantamiento.",
+  },
+  {
+    n: "III",
+    text: "El detalle es nuestra teología y el silencio entre transiciones, oración.",
+  },
+];
+
+// La primera letra de la primera frase, separada para tratarse como capital iluminada
+const FIRST_LETTER = "C";
 
 export function Manifiesto() {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,13 +66,55 @@ export function Manifiesto() {
         </svg>
       </motion.div>
 
-      <div className="relative z-10 max-w-xl flex flex-col gap-12">
+      <div className="relative z-10 max-w-2xl flex flex-col gap-12">
         <BracketLabel className="text-bone">MANIFIESTO / 001</BracketLabel>
-        <SplitTextReveal
-          text={MANIFIESTO}
-          className="font-display text-3xl md:text-5xl leading-tight text-ink"
-        />
-        <div className="flex items-center justify-between border-t border-ash/40 pt-4">
+
+        {/* Versículos con capital iluminada */}
+        <div className="flex flex-col gap-8">
+          {VERSES.map((verse, i) => (
+            <motion.div
+              key={verse.n}
+              className="flex gap-4 md:gap-6 items-start"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.7, delay: i * 0.15 }}
+            >
+              {/* Número de versículo */}
+              <span className="font-calig text-2xl md:text-3xl leading-none text-blood pt-1 shrink-0 w-8 text-right">
+                {verse.n}
+              </span>
+
+              {/* Texto del versículo (con capital iluminada solo en el primero) */}
+              {i === 0 ? (
+                <p className="font-display text-2xl md:text-4xl leading-tight text-ink">
+                  {/* Capital iluminada */}
+                  <span className="relative inline-block float-left mr-3 md:mr-4">
+                    <span
+                      className="font-calig leading-none text-blood"
+                      style={{
+                        fontSize: "5.5rem",
+                        textShadow: "0 0 24px rgba(192,32,43,0.4), 0 0 8px rgba(192,32,43,0.3)",
+                        lineHeight: "0.85",
+                      }}
+                    >
+                      {FIRST_LETTER}
+                    </span>
+                    {/* Decoración: pequeña cruz junto a la capital */}
+                    <span className="absolute -top-1 -right-2 font-calig text-xs text-ash opacity-60">✠</span>
+                  </span>
+                  {verse.text.slice(1)}
+                </p>
+              ) : (
+                <p className="font-display text-2xl md:text-4xl leading-tight text-ink">
+                  {verse.text}
+                </p>
+              )}
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between border-t border-ash/40 pt-4 mt-4">
           <CoordsTag />
           <BracketLabel className="text-bone">MMXXVI</BracketLabel>
         </div>

@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/cn";
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
+import { playClickSound, playHoverSound } from "@/lib/hoverSound";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -12,11 +13,21 @@ export function RedButton({
   children,
   className,
   variant = "outline",
+  onClick,
+  onMouseEnter,
   ...rest
 }: Props) {
   return (
     <button
       {...rest}
+      onMouseEnter={(e) => {
+        playHoverSound();
+        onMouseEnter?.(e);
+      }}
+      onClick={(e) => {
+        playClickSound();
+        onClick?.(e);
+      }}
       className={cn(
         "group relative inline-flex items-center gap-2 px-4 py-2 font-mono text-xs uppercase tracking-[0.25em] transition-colors",
         "focus:outline-none focus-visible:ring-1 focus-visible:ring-blood",

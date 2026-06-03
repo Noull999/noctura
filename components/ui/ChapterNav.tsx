@@ -8,6 +8,7 @@ const CHAPTERS = [
   { id: "origen", label: "002", title: "ORIGEN" },
   { id: "cuerpo", label: "003", title: "CUERPO" },
   { id: "vestigios", label: "004", title: "VESTIGIOS" },
+  { id: "codice", label: "005", title: "CÓDICE" },
 ];
 
 export function ChapterNav() {

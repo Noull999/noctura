@@ -5,6 +5,7 @@ import { BracketLabel } from "@/components/ui/BracketLabel";
 import { CoordsTag } from "@/components/ui/CoordsTag";
 import { RedButton } from "@/components/ui/RedButton";
 import { Marquee } from "@/components/effects/Marquee";
+import { RomanClock } from "@/components/ui/RomanClock";
 
 export function FooterSection({ onContact }: { onContact?: () => void }) {
   return (
@@ -26,7 +27,7 @@ export function FooterSection({ onContact }: { onContact?: () => void }) {
           VACÍO
         </motion.h2>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col items-center gap-4">
           <RedButton
             variant="outline"
             onClick={() => {
@@ -36,6 +37,7 @@ export function FooterSection({ onContact }: { onContact?: () => void }) {
           >
             VOLVER ARRIBA
           </RedButton>
+          <RomanClock />
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl border-t border-ash/30 pt-8">
