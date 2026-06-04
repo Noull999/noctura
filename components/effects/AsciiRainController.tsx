@@ -6,22 +6,34 @@ import { AsciiRain } from "./AsciiRain";
 // IDs de secciones que disparan ASCII rain al ENTRAR al viewport.
 const TRIGGER_IDS = ["manifiesto", "origen", "cuerpo", "vestigios", "codice"];
 
-const DURATION = 1700; // cuánto dura visible — más presencia ahora que las secciones son más largas
-const COOLDOWN = 2200; // tiempo mínimo entre triggers
+const DURATION = 1700; // cuánto dura visible
+const COOLDOWN = 1800; // tiempo mínimo entre triggers — bajo para que scrolls rápidos no se pierdan
 
 export function AsciiRainController() {
   const [active, setActive] = useState(false);
   const lastTriggerRef = useRef(0);
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const trigger = () => {
-      const now = Date.now();
-      if (now - lastTriggerRef.current < COOLDOWN) return;
-      lastTriggerRef.current = now;
+    const fire = () => {
+      lastTriggerRef.current = Date.now();
       setActive(true);
       if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
       hideTimerRef.current = setTimeout(() => setActive(false), DURATION);
+    };
+
+    const trigger = () => {
+      const now = Date.now();
+      const remaining = COOLDOWN - (now - lastTriggerRef.current);
+      if (remaining <= 0) {
+        fire();
+      } else {
+        // Si todavía está en cooldown, encolar la activación para que dispare
+        // tan pronto termine. Evita perder triggers en scrolls rápidos.
+        if (pendingTimerRef.current) clearTimeout(pendingTimerRef.current);
+        pendingTimerRef.current = setTimeout(fire, remaining);
+      }
     };
 
     const observer = new IntersectionObserver(
@@ -53,6 +65,7 @@ export function AsciiRainController() {
       observer.disconnect();
       clearTimeout(retry);
       if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+      if (pendingTimerRef.current) clearTimeout(pendingTimerRef.current);
     };
   }, []);
 
