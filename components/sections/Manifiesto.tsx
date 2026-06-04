@@ -36,7 +36,7 @@ export function Manifiesto() {
     <section
       id="manifiesto"
       ref={ref}
-      className="relative min-h-screen w-full overflow-hidden bg-surface flex items-center justify-start px-6 md:px-16 py-32"
+      className="relative min-h-[140vh] w-full overflow-hidden bg-surface flex items-center justify-start px-6 md:px-16 py-32"
     >
       {/* Iron Eye Background */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-screen opacity-100 pointer-events-none">
