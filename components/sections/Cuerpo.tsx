@@ -42,6 +42,7 @@ export function Cuerpo() {
       </div>
 
       <Marquee
+        duration={38}
         items={[
           { label: "CARNE DIGITAL" },
           { label: "PIEL DE SOMBRA" },

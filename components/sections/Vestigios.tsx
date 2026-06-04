@@ -153,6 +153,7 @@ export function Vestigios() {
       </div>
 
       <Marquee
+        duration={32}
         items={[
           { label: "HUESO QUEMADO" },
           { label: "CICATRIZ" },

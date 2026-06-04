@@ -173,6 +173,7 @@ export function Codice() {
       </div>
 
       <Marquee
+        duration={26}
         items={[
           { label: "RELIQUIAS" },
           { label: "CÓDIGO VIVO" },

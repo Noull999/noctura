@@ -6,8 +6,8 @@ import { AsciiRain } from "./AsciiRain";
 // IDs de secciones que disparan ASCII rain al ENTRAR al viewport.
 const TRIGGER_IDS = ["manifiesto", "origen", "cuerpo", "vestigios", "codice"];
 
-const DURATION = 1300; // cuánto dura visible
-const COOLDOWN = 2000; // tiempo mínimo entre triggers
+const DURATION = 1700; // cuánto dura visible — más presencia ahora que las secciones son más largas
+const COOLDOWN = 2200; // tiempo mínimo entre triggers
 
 export function AsciiRainController() {
   const [active, setActive] = useState(false);

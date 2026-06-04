@@ -40,6 +40,7 @@ export function Origen() {
       </div>
 
       <Marquee
+        duration={48}
         items={[
           { label: "INVOCACIÓN" },
           { label: "UMBRAL" },
