@@ -13,30 +13,29 @@ const ParticleField = dynamic(
 
 export function Cuerpo() {
   return (
-    <section id="cuerpo" className="relative min-h-[200vh] w-full overflow-hidden bg-void">
-      <div className="sticky top-0 h-screen w-full">
-        <div className="absolute inset-0">
-          <ParticleField />
-        </div>
+    <section id="cuerpo" className="relative min-h-[140vh] w-full overflow-hidden bg-void">
+      {/* Partículas como fondo persistente durante todo el scroll de Cuerpo */}
+      <div className="absolute inset-0 pointer-events-none">
+        <ParticleField />
+      </div>
 
-        <div className="relative z-10 grid grid-cols-12 gap-4 px-6 md:px-12 h-full items-center">
-          <div className="col-span-12 md:col-span-4 flex flex-col gap-4">
-            <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
-            <IlluminatedCapital
-              text="La materia se reúne. Forma silueta, halo, columna. Y al pasar el ojo, se disgrega — pura partícula, puro polvo."
-              className="max-w-sm"
-              textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
-            />
-          </div>
-          <div className="col-span-12 md:col-span-8 flex justify-end items-end h-full pb-16">
-            <div className="flex flex-col items-end gap-2">
-              <h2 className="font-display text-[16vw] md:text-[12vw] leading-[0.8] tracking-tight text-right">
-                CUERPO
-              </h2>
-              <div className="flex items-center gap-4">
-                <ChapterIndex n="002" className="text-[8vw] md:text-[4vw]" />
-                <BracketLabel highlight>CUERPO</BracketLabel>
-              </div>
+      <div className="relative z-10 grid grid-cols-12 gap-4 px-6 md:px-12 min-h-[140vh] items-center py-24">
+        <div className="col-span-12 md:col-span-4 flex flex-col gap-4">
+          <BracketLabel className="text-bone">CAPÍTULO</BracketLabel>
+          <IlluminatedCapital
+            text="La materia se reúne. Forma silueta, halo, columna. Y al pasar el ojo, se disgrega — pura partícula, puro polvo."
+            className="max-w-sm"
+            textClassName="font-mono text-xs tracking-[0.18em] text-bone leading-relaxed"
+          />
+        </div>
+        <div className="col-span-12 md:col-span-8 flex justify-end">
+          <div className="flex flex-col items-end gap-2">
+            <h2 className="font-display text-[16vw] md:text-[12vw] leading-[0.8] tracking-tight text-right">
+              CUERPO
+            </h2>
+            <div className="flex items-center gap-4">
+              <ChapterIndex n="002" className="text-[8vw] md:text-[4vw]" />
+              <BracketLabel highlight>CUERPO</BracketLabel>
             </div>
           </div>
         </div>
