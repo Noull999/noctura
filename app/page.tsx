@@ -17,6 +17,7 @@ import { ContactModal } from "@/components/ui/ContactModal";
 import { Hero3D } from "@/components/sections/Hero3D";
 
 const Manifiesto = dynamic(() => import("@/components/sections/Manifiesto").then(m => ({ default: m.Manifiesto })), { ssr: false });
+const Silencio = dynamic(() => import("@/components/sections/Silencio").then(m => ({ default: m.Silencio })), { ssr: false });
 const Origen = dynamic(() => import("@/components/sections/Origen").then(m => ({ default: m.Origen })), { ssr: false });
 const Cuerpo = dynamic(() => import("@/components/sections/Cuerpo").then(m => ({ default: m.Cuerpo })), { ssr: false });
 const Vestigios = dynamic(() => import("@/components/sections/Vestigios").then(m => ({ default: m.Vestigios })), { ssr: false });
@@ -69,6 +70,7 @@ export default function Home() {
       {sectionsReady && (
         <>
           <Manifiesto />
+          <Silencio />
           <Origen />
           <Cuerpo />
           <Vestigios />

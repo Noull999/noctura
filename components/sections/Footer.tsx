@@ -27,16 +27,35 @@ export function FooterSection({ onContact }: { onContact?: () => void }) {
           VACÍO
         </motion.h2>
 
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-5">
+          <motion.p
+            className="font-mono text-[10px] md:text-xs uppercase tracking-[0.35em] text-ash text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 1.4, delay: 0.3 }}
+          >
+            EL UMBRAL PERMANECE ABIERTO
+          </motion.p>
+
           <RedButton
-            variant="outline"
+            variant="filled"
+            onClick={onContact}
+            className="px-6 py-3 text-sm"
+          >
+            {"{ INVOCAR UN RITO }"}
+          </RedButton>
+
+          <button
             onClick={() => {
               const w = window as unknown as { __lenis?: { scrollTo: (t: number, o?: { duration?: number }) => void } };
               w.__lenis?.scrollTo(0, { duration: 2 });
             }}
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-ash/60 hover:text-ash transition-colors"
           >
-            VOLVER ARRIBA
-          </RedButton>
+            ↑ volver al umbral
+          </button>
+
           <RomanClock />
         </div>
 
