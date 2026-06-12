@@ -4,11 +4,16 @@ import { useRef, Suspense } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { SceneCanvas } from './SceneCanvas'
 
 function IronEye() {
   const ref = useRef<THREE.Group>(null)
-  const gltf = useLoader(GLTFLoader, '/models/Meshy_AI_The_Iron_Eye_0602205245_texture.glb')
+  const gltf = useLoader(
+    GLTFLoader,
+    '/models/optimized/Meshy_AI_The_Iron_Eye_0602205245_texture.glb',
+    (loader) => loader.setMeshoptDecoder(MeshoptDecoder),
+  )
 
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += 0.5 * Math.min(delta, 0.05)

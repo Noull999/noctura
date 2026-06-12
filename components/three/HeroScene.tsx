@@ -4,6 +4,7 @@ import { useRef, useEffect, Suspense } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { SceneCanvas } from './SceneCanvas'
 
 function TribalBracelet({ mousePosition, isMousePressed }: {
@@ -11,7 +12,11 @@ function TribalBracelet({ mousePosition, isMousePressed }: {
   isMousePressed: React.MutableRefObject<boolean>
 }) {
   const ref = useRef<THREE.Group>(null)
-  const gltf = useLoader(GLTFLoader, '/models/meshy-model.glb')
+  const gltf = useLoader(
+    GLTFLoader,
+    '/models/optimized/meshy-model.glb',
+    (loader) => loader.setMeshoptDecoder(MeshoptDecoder),
+  )
   const autoRotationRef = useRef(0)
 
   useFrame((_, delta) => {

@@ -4,16 +4,20 @@ import { useRef, Suspense } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { SceneCanvas } from './SceneCanvas'
 
 function ChromeRibcage() {
   const ref = useRef<THREE.Group>(null)
-  const gltf = useLoader(GLTFLoader, '/models/Meshy_AI_Chrome_Ribcage_0603162821_texture.glb')
+  const gltf = useLoader(
+    GLTFLoader,
+    '/models/optimized/Meshy_AI_Chrome_Ribcage_0603162821_texture.glb',
+    (loader) => loader.setMeshoptDecoder(MeshoptDecoder),
+  )
 
   useFrame((_, delta) => {
     if (ref.current) {
       ref.current.rotation.y += 0.3 * delta
-      // Pequeña oscilación vertical
       ref.current.position.y = Math.sin(Date.now() * 0.0008) * 0.5
     }
   })

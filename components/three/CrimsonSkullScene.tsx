@@ -4,11 +4,16 @@ import { useRef, Suspense } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { SceneCanvas } from './SceneCanvas'
 
 function CrimsonSkull() {
   const ref = useRef<THREE.Group>(null)
-  const gltf = useLoader(GLTFLoader, '/models/Meshy_AI_Crimson_Chrome_Skull_0603211752_texture.glb')
+  const gltf = useLoader(
+    GLTFLoader,
+    '/models/optimized/Meshy_AI_Crimson_Chrome_Skull_0603211752_texture.glb',
+    (loader) => loader.setMeshoptDecoder(MeshoptDecoder),
+  )
 
   useFrame((_, delta) => {
     if (ref.current) {
@@ -18,7 +23,7 @@ function CrimsonSkull() {
   })
 
   return (
-    <group ref={ref} scale={16} position={[-4, 0, 0]}>
+    <group ref={ref} scale={12} position={[-2.5, 0, 0]}>
       <primitive object={gltf.scene} />
     </group>
   )
@@ -27,7 +32,7 @@ function CrimsonSkull() {
 export function CrimsonSkullScene() {
   return (
     <SceneCanvas
-      camera={{ position: [0, 3, 26], fov: 65 }}
+      camera={{ position: [0, 3, 32], fov: 60 }}
       style={{ background: 'transparent' }}
       dpr={1}
     >

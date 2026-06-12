@@ -4,10 +4,15 @@ import { useRef, Suspense } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 
 function MidnightSpikedOrb() {
   const ref = useRef<THREE.Group>(null)
-  const gltf = useLoader(GLTFLoader, '/models/Meshy_AI_Midnight_Spiked_Orb_0602212519_texture.glb')
+  const gltf = useLoader(
+    GLTFLoader,
+    '/models/optimized/Meshy_AI_Midnight_Spiked_Orb_0602212519_texture.glb',
+    (loader) => loader.setMeshoptDecoder(MeshoptDecoder),
+  )
 
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += 0.45 * delta
