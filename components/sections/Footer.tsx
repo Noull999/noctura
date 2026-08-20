@@ -42,6 +42,7 @@ export function FooterSection({ onContact }: { onContact?: () => void }) {
             variant="filled"
             onClick={onContact}
             className="px-6 py-3 text-sm"
+            data-track="cta-invocar-rito"
           >
             {"{ INVOCAR UN RITO }"}
           </RedButton>
@@ -52,6 +53,7 @@ export function FooterSection({ onContact }: { onContact?: () => void }) {
               w.__lenis?.scrollTo(0, { duration: 2 });
             }}
             className="font-mono text-[10px] uppercase tracking-[0.3em] text-ash/60 hover:text-ash transition-colors"
+            data-track="volver-arriba"
           >
             ↑ volver al umbral
           </button>
@@ -77,6 +79,7 @@ export function FooterSection({ onContact }: { onContact?: () => void }) {
             <button
               onClick={onContact}
               className="font-mono text-[10px] text-blood hover:text-pulse transition-colors text-left tracking-[0.1em]"
+              data-track="contacto-email"
             >
               JOSEESTEBANASENCIO@GMAIL.COM
             </button>

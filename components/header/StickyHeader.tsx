@@ -126,13 +126,14 @@ export function StickyHeader({ onContact }: { onContact?: () => void }) {
             <button
               onClick={() => toggle()}
               className="font-mono text-xs uppercase tracking-[0.25em] text-bone hover:text-blood transition-colors"
+              data-track="toggle-sonido"
             >
               {"{SONIDO}"}{" "}
               <span className={audioOn ? "text-blood" : "text-ash"}>
                 {audioOn ? "ON" : "OFF"}
               </span>
             </button>
-            <RedButton variant="filled" onClick={onContact}>CONTACTO</RedButton>
+            <RedButton variant="filled" onClick={onContact} data-track="header-contacto">CONTACTO</RedButton>
           </div>
         </motion.header>
       )}
