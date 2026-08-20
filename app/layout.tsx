@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Anton, JetBrains_Mono, Pirata_One } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -72,6 +73,12 @@ export default function RootLayout({
     >
       <body className="bg-void text-ink font-mono">
         <Providers>{children}</Providers>
+        <Script
+          defer
+          src="https://admingloubal.vercel.app/track.js"
+          data-app="glb_071982e96fef"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
