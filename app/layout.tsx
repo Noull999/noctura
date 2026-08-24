@@ -25,6 +25,7 @@ const pirata = Pirata_One({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://noctura-wheat.vercel.app"),
   title: "{NÓCTURA} — RITO Y CÓDIGO",
   description:
     "Construimos liturgias digitales. Cada pixel es un sacramento, cada animación un encantamiento. Diseño de experiencias — Puerto Montt, Chile.",
@@ -34,26 +35,21 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_CL",
-    url: "https://noctura.vercel.app",
+    url: "https://noctura-wheat.vercel.app",
     title: "{NÓCTURA} — RITO Y CÓDIGO",
     description:
       "Construimos liturgias digitales. Cada pixel es un sacramento, cada animación un encantamiento.",
     siteName: "NÓCTURA",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "NÓCTURA — RITO Y CÓDIGO",
-      },
-    ],
+    // Sin `images`: se deja que app/opengraph-image.tsx (generada en
+    // runtime con next/og) sea la fuente automática — un `images`
+    // explicito aca pisa esa generacion, y apuntaba a /og-image.png,
+    // un archivo que nunca existio en public/.
   },
   twitter: {
     card: "summary_large_image",
     title: "{NÓCTURA} — RITO Y CÓDIGO",
     description:
       "Construimos liturgias digitales. Cada pixel es un sacramento.",
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,
