@@ -74,7 +74,7 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <Script
           defer
-          src="https://admingloubal.vercel.app/track.js"
+          src="https://admingloubal.vercel.app/s.js"
           data-app="glb_071982e96fef"
           strategy="afterInteractive"
         />
